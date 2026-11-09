@@ -383,6 +383,12 @@
       content: "";
       transition: transform .4s;
     }
+    .product-photo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .product:hover .product-image::before { transform: scale(1.05); }
     .product-emoji { font-size: 77px; filter: drop-shadow(0 13px 10px rgba(42,45,34,.13)); transition: transform .35s; }
     .product:hover .product-emoji { transform: translateY(-5px) rotate(-5deg); }
@@ -404,6 +410,7 @@
     .product-details h3 { margin: 6px 0 5px; font-family: var(--sans); font-size: 17px; font-weight: 750; letter-spacing: -.02em; }
     .product-meta { display: flex; justify-content: space-between; gap: 8px; align-items: center; color: var(--muted); font-size: 11px; }
     .product-meta strong { color: var(--ink); font-size: 11px; }
+    .catalogue-status { grid-column: 1 / -1; color: var(--muted); font-size: 13px; }
     .more-goods {
       display: flex;
       align-items: center;
@@ -629,7 +636,7 @@
 
     <section class="category-band" aria-label="Shop by category">
       <div class="category-list wrap">
-        <a class="category" href="#shop" data-category-link="clogs"><span class="category-icon" aria-hidden="true">👟</span><span><strong>Crocs & slides</strong><small>Easy for busy days</small></span></a>
+        <a class="category" href="#shop" data-category-link="crocs-slides"><span class="category-icon" aria-hidden="true">👟</span><span><strong>Crocs & slides</strong><small>Easy for busy days</small></span></a>
         <a class="category" href="#shop" data-category-link="mats"><span class="category-icon" aria-hidden="true">🧶</span><span><strong>Mats</strong><small>Make your room yours</small></span></a>
         <a class="category" href="#shop" data-category-link="scents"><span class="category-icon" aria-hidden="true">🕯️</span><span><strong>Scents</strong><small>Freshen up your space</small></span></a>
         <a class="category" href="#shop" data-category-link="rice"><span class="category-icon" aria-hidden="true">🌾</span><span><strong>Rice & pantry</strong><small>Keep the kitchen sorted</small></span></a>
@@ -642,30 +649,11 @@
         <div><span class="eyebrow">A few things we offer</span><h2 id="shop-title">Your campus essentials.</h2></div>
         <p>These are just a few highlights. Have something else in mind? Ask us and we’ll let you know if it’s available.</p>
       </div>
-      <div class="filters" role="group" aria-label="Filter products">
+      <div class="filters" id="product-filters" role="group" aria-label="Filter products">
         <button class="filter active" type="button" data-filter="all" aria-pressed="true">All the good stuff</button>
-        <button class="filter" type="button" data-filter="clogs" aria-pressed="false">Crocs & slides</button>
-        <button class="filter" type="button" data-filter="mats" aria-pressed="false">Mats</button>
-        <button class="filter" type="button" data-filter="scents" aria-pressed="false">Scents</button>
-        <button class="filter" type="button" data-filter="rice" aria-pressed="false">Rice & pantry</button>
       </div>
-      <div class="products">
-        <article class="product" data-category="clogs">
-          <div class="product-image" style="--tone:#e6ded2"><span class="badge">Campus wear</span><span class="product-emoji" aria-hidden="true">👟</span></div>
-          <div class="product-details"><small>Crocs & slides</small><h3>Everyday Crocs</h3><div class="product-meta"><span>Comfort for class and beyond</span><strong>Ask for price</strong></div></div>
-        </article>
-        <article class="product" data-category="mats">
-          <div class="product-image" style="--tone:#dce1d7"><span class="badge">Room upgrade</span><span class="product-emoji" aria-hidden="true">🧶</span></div>
-          <div class="product-details"><small>Mats</small><h3>Room-ready mat</h3><div class="product-meta"><span>A simple touch for your space</span><strong>Ask for price</strong></div></div>
-        </article>
-        <article class="product" data-category="scents">
-          <div class="product-image" style="--tone:#e8e0d0"><span class="badge">Freshen up</span><span class="product-emoji" aria-hidden="true">🕯️</span></div>
-          <div class="product-details"><small>Scents</small><h3>Room fragrance</h3><div class="product-meta"><span>Find a scent that feels like you</span><strong>Ask for price</strong></div></div>
-        </article>
-        <article class="product" data-category="rice">
-          <div class="product-image" style="--tone:#dfe3d8"><span class="badge">Kitchen staple</span><span class="product-emoji" aria-hidden="true">🍚</span></div>
-          <div class="product-details"><small>Rice & pantry</small><h3>Everyday rice</h3><div class="product-meta"><span>For the shared kitchen or your own</span><strong>Ask for price</strong></div></div>
-        </article>
+      <div class="products" id="products" aria-live="polite">
+        <p class="catalogue-status">Loading the catalogue…</p>
       </div>
       <aside class="more-goods" id="other-goods" aria-labelledby="more-goods-title">
         <div>
@@ -714,30 +702,112 @@
     <div class="footer-bottom wrap">© <span id="year"></span> M3 Group Holdings · Copperbelt University, Kitwe.</div>
   </footer>
   <script>
-    const filterButtons = document.querySelectorAll(".filter");
-    const products = document.querySelectorAll(".product");
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector("#nav-links");
+    const filterContainer = document.querySelector("#product-filters");
+    const productContainer = document.querySelector("#products");
 
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const selected = button.dataset.filter;
-        filterButtons.forEach((item) => {
-          const active = item === button;
-          item.classList.toggle("active", active);
-          item.setAttribute("aria-pressed", String(active));
-        });
-        products.forEach((product) => {
-          product.hidden = selected !== "all" && product.dataset.category !== selected;
-        });
+    function slugify(value) {
+      return value.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    function makeElement(tag, className, text) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    }
+
+    function renderProduct(product) {
+      const article = makeElement("article", "product");
+      article.dataset.category = slugify(product.category);
+      const imagePanel = makeElement("div", "product-image");
+      imagePanel.style.setProperty("--tone", /^#[0-9a-f]{6}$/i.test(product.tone) ? product.tone : "#e6ded2");
+
+      if (product.badge) imagePanel.append(makeElement("span", "badge", product.badge));
+      if (product.image) {
+        const image = makeElement("img", "product-photo");
+        image.src = product.image;
+        image.alt = product.imageAlt || product.name;
+        image.loading = "lazy";
+        image.addEventListener("error", () => {
+          image.replaceWith(makeElement("span", "product-emoji", product.emoji || "🛍️"));
+        }, { once: true });
+        imagePanel.append(image);
+      } else {
+        imagePanel.append(makeElement("span", "product-emoji", product.emoji || "🛍️"));
+      }
+
+      const details = makeElement("div", "product-details");
+      details.append(makeElement("small", "", product.category));
+      details.append(makeElement("h3", "", product.name));
+      const meta = makeElement("div", "product-meta");
+      meta.append(makeElement("span", "", product.description));
+      meta.append(makeElement("strong", "", product.price || "Ask for price"));
+      details.append(meta);
+      article.append(imagePanel, details);
+      return article;
+    }
+
+    function setActiveFilter(selected) {
+      filterContainer.querySelectorAll(".filter").forEach((button) => {
+        const active = button.dataset.filter === selected;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
       });
+      productContainer.querySelectorAll(".product").forEach((product) => {
+        product.hidden = selected !== "all" && product.dataset.category !== selected;
+      });
+    }
+
+    async function loadCatalogue() {
+      const response = await fetch("./products.json");
+      if (!response.ok) throw new Error(`Catalogue request failed (${response.status})`);
+      const catalogue = await response.json();
+      if (!Array.isArray(catalogue.products)) throw new Error("Catalogue must contain a products array");
+
+      const products = catalogue.products.filter((product) =>
+        product && typeof product.name === "string" &&
+        typeof product.category === "string" &&
+        typeof product.description === "string"
+      );
+      if (products.length !== catalogue.products.length) {
+        throw new Error("Each product needs a name, category, and description");
+      }
+
+      const categories = [...new Map(products.map((product) => [
+        slugify(product.category),
+        product.category
+      ])).entries()];
+
+      filterContainer.replaceChildren();
+      const allButton = makeElement("button", "filter active", "All the good stuff");
+      allButton.type = "button";
+      allButton.dataset.filter = "all";
+      allButton.setAttribute("aria-pressed", "true");
+      filterContainer.append(allButton);
+      categories.forEach(([slug, name]) => {
+        const button = makeElement("button", "filter", name);
+        button.type = "button";
+        button.dataset.filter = slug;
+        button.setAttribute("aria-pressed", "false");
+        filterContainer.append(button);
+      });
+      productContainer.replaceChildren(...products.map(renderProduct));
+    }
+
+    filterContainer.addEventListener("click", (event) => {
+      const button = event.target.closest(".filter");
+      if (button) setActiveFilter(button.dataset.filter);
     });
 
     document.querySelectorAll("[data-category-link]").forEach((link) => {
       link.addEventListener("click", () => {
-        const category = link.dataset.categoryLink;
-        const button = document.querySelector(`.filter[data-filter="${category}"]`);
-        button?.click();
+        const button = filterContainer.querySelector(`.filter[data-filter="${link.dataset.categoryLink}"]`);
+        if (button) {
+          setActiveFilter(button.dataset.filter);
+          document.querySelector("#shop-title").scrollIntoView();
+        }
       });
     });
 
@@ -757,6 +827,10 @@
     });
 
     document.querySelector("#year").textContent = new Date().getFullYear();
+    loadCatalogue().catch((error) => {
+      console.error("Could not load the product catalogue.", error);
+      productContainer.replaceChildren(makeElement("p", "catalogue-status", "The catalogue could not be loaded. Please contact M3 for current products."));
+    });
   </script>
 </body>
 </html>

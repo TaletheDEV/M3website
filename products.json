@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "name": "Everyday Crocs",
+      "category": "Crocs & slides",
+      "description": "Comfort for class and beyond",
+      "badge": "Campus wear",
+      "price": "Ask for price",
+      "tone": "#e6ded2",
+      "emoji": "👟",
+      "image": ""
+    },
+    {
+      "name": "Room-ready mat",
+      "category": "Mats",
+      "description": "A simple touch for your space",
+      "badge": "Room upgrade",
+      "price": "Ask for price",
+      "tone": "#dce1d7",
+      "emoji": "🧶",
+      "image": ""
+    },
+    {
+      "name": "Room fragrance",
+      "category": "Scents",
+      "description": "Find a scent that feels like you",
+      "badge": "Freshen up",
+      "price": "Ask for price",
+      "tone": "#e8e0d0",
+      "emoji": "🕯️",
+      "image": ""
+    },
+    {
+      "name": "Everyday rice",
+      "category": "Rice & pantry",
+      "description": "For the shared kitchen or your own",
+      "badge": "Kitchen staple",
+      "price": "Ask for price",
+      "tone": "#dfe3d8",
+      "emoji": "🍚",
+      "image": ""
+    }
+  ]
+}
