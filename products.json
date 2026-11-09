@@ -1,14 +1,28 @@
 {
   "products": [
     {
-      "name": "Everyday Crocs",
+      "name": "Crocs",
       "category": "Crocs & slides",
-      "description": "Comfort for class and beyond",
+      "description": "Easy for class, casual days, and hanging out with friends",
       "badge": "Campus wear",
       "price": "Ask for price",
       "tone": "#e6ded2",
       "emoji": "👟",
-      "image": ""
+      "image": "images/products/plastic-clogs.jpg",
+      "variants": [],
+      "optionsPrompt": "Ask us about available sizes, colors, and stock."
+    },
+    {
+      "name": "Slides",
+      "category": "Crocs & slides",
+      "description": "Easy slip-ons for relaxed campus days and casual hangs",
+      "badge": "Casual wear",
+      "price": "Ask for price",
+      "tone": "#dce1d7",
+      "emoji": "🩴",
+      "image": "",
+      "variants": [],
+      "optionsPrompt": "Ask us about available sizes, colors, and stock."
     },
     {
       "name": "Room-ready mat",
@@ -21,24 +35,76 @@
       "image": ""
     },
     {
-      "name": "Room fragrance",
-      "category": "Scents",
-      "description": "Find a scent that feels like you",
-      "badge": "Freshen up",
+      "name": "Floor Mat",
+      "category": "Mats",
+      "description": "A practical mat to make your room feel more like home",
+      "badge": "Room upgrade",
       "price": "Ask for price",
-      "tone": "#e8e0d0",
-      "emoji": "🕯️",
-      "image": ""
+      "tone": "#dce1d7",
+      "emoji": "🧶",
+      "image": "",
+      "variants": [],
+      "optionsPrompt": "Ask us about available sizes, colors, and stock."
     },
     {
-      "name": "Everyday rice",
-      "category": "Rice & pantry",
-      "description": "For the shared kitchen or your own",
+      "name": "Monk Mat",
+      "category": "Mats",
+      "description": "A comfortable mat for your everyday space",
+      "badge": "Room upgrade",
+      "price": "Ask for price",
+      "tone": "#e8dfd5",
+      "emoji": "🧶",
+      "image": "",
+      "variants": [],
+      "optionsPrompt": "Ask us about available sizes, colors, and stock."
+    },
+    {
+      "name": "Painting",
+      "category": "Mats",
+      "description": "Add a personal touch to your room walls",
+      "badge": "Room upgrade",
+      "price": "Ask for price",
+      "tone": "#e8e0d0",
+      "emoji": "🖼️",
+      "image": "",
+      "variants": [],
+      "optionsPrompt": "Ask us about available designs and stock."
+    },
+    {
+      "name": "Men's Perfume",
+      "category": "Perfumes",
+      "description": "Find a fragrance that suits your style",
+      "badge": "For him",
+      "price": "Ask for price",
+      "tone": "#e8e0d0",
+      "emoji": "🧴",
+      "image": "",
+      "variants": [],
+      "optionsPrompt": "Ask us about available perfume types and quantities."
+    },
+    {
+      "name": "Women's Perfume",
+      "category": "Perfumes",
+      "description": "Explore fragrances for every mood and moment",
+      "badge": "For her",
+      "price": "Ask for price",
+      "tone": "#e8dfd5",
+      "emoji": "🌸",
+      "image": "",
+      "variants": [],
+      "optionsPrompt": "Ask us about available perfume types and quantities."
+    },
+    {
+      "name": "Nakonde Rice",
+      "category": "Nakonde Rice",
+      "description": "A pantry staple for meals at home or on campus",
       "badge": "Kitchen staple",
       "price": "Ask for price",
       "tone": "#dfe3d8",
       "emoji": "🍚",
-      "image": ""
+      "image": "",
+      "variants": [],
+      "optionsPrompt": "Ask us about available pack sizes and quantities."
     }
   ]
 }

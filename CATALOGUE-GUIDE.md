@@ -18,20 +18,51 @@ Each product uses these fields:
 
 ```json
 {
-  "name": "Product name",
+   "name": "Crocs",
   "category": "Category name",
   "description": "Short product description",
   "badge": "Optional short label",
   "price": "K45",
   "tone": "#e6ded2",
-  "emoji": "🛍️",
-  "image": "images/products/product-photo.jpg"
+   "emoji": "🛍️",
+   "image": "images/products/product-photo.jpg",
+   "variants": [
+      { "size": "39", "color": "Black", "quantity": 2 }
+   ],
+   "optionsPrompt": "Ask us about available sizes and colors."
 }
 ```
 
 `name`, `category`, and `description` are required. `badge`, `price`, `tone`,
-`emoji`, and `image` are optional. If no image is supplied, the emoji is shown.
-The category filters on the site are created automatically from the catalogue.
+`emoji`, `image`, `variants`, and `optionsPrompt` are optional. If no image is
+supplied, the emoji is shown. The category filters on the site are created
+automatically from the catalogue.
+
+## Set available sizes, colors, and quantities
+
+For Crocs and slides, add one `variants` entry for each size/color combination.
+The quantity appears beside that combination on the product card:
+
+```json
+"variants": [
+   { "size": "39", "color": "Black", "quantity": 2 },
+   { "size": "40", "color": "White", "quantity": 1 }
+]
+```
+
+For men's and women's perfumes, put the fragrance name or type and size in
+`type`, then enter its available quantity:
+
+```json
+"variants": [
+   { "type": "Fresh scent, 50ml", "quantity": 3 },
+   { "type": "Woody scent, 100ml", "quantity": 1 }
+]
+```
+
+Leave `variants` empty and add an `optionsPrompt` when current options or stock
+have not been entered. The site will show the prompt so customers can contact
+M3 to confirm availability.
 
 ## Add or replace a product photo
 
