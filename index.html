@@ -312,7 +312,7 @@
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
     }
-    .category-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .category-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
     .category {
       display: flex;
       align-items: center;
@@ -329,6 +329,7 @@
     .category:nth-child(2) .category-icon { background: #dce1d7; }
     .category:nth-child(3) .category-icon { background: #e8e0d0; }
     .category:nth-child(4) .category-icon { background: #dfe3d8; }
+    .category:nth-child(5) .category-icon { background: #e8dfd5; }
     .category strong { display: block; font-family: var(--sans); font-size: 14px; font-weight: 750; }
     .category small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
 
@@ -403,6 +404,21 @@
     .product-details h3 { margin: 6px 0 5px; font-family: var(--sans); font-size: 17px; font-weight: 750; letter-spacing: -.02em; }
     .product-meta { display: flex; justify-content: space-between; gap: 8px; align-items: center; color: var(--muted); font-size: 11px; }
     .product-meta strong { color: var(--ink); font-size: 11px; }
+    .more-goods {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 32px;
+      padding: 24px 28px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--coral);
+      border-radius: 6px;
+      background: var(--white);
+    }
+    .more-goods h3 { margin: 7px 0 5px; font-size: 19px; font-weight: 800; letter-spacing: -.03em; }
+    .more-goods p { max-width: 580px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+    .more-goods .button { flex: 0 0 auto; }
 
     .story {
       display: grid;
@@ -506,6 +522,7 @@
       .hero-art { min-height: 360px; }
       .products { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
       .product-image { min-height: 255px; }
+      .category-list { grid-template-columns: repeat(3, 1fr); }
       .nav-links { gap: 18px; }
       .story-copy { padding: 35px; }
     }
@@ -552,6 +569,8 @@
       .product-emoji { font-size: 62px; }
       .product-details h3 { font-size: 18px; }
       .product-meta { align-items: start; flex-direction: column; gap: 4px; }
+      .more-goods { align-items: stretch; flex-direction: column; gap: 16px; margin-top: 25px; padding: 21px; }
+      .more-goods .button { align-self: flex-start; }
       .story { grid-template-columns: 1fr; }
       .story-art { min-height: 255px; }
       .story-circle { width: 205px; height: 205px; }
@@ -588,7 +607,7 @@
       <div class="hero-copy">
         <span class="eyebrow">For the Copperbelt University crowd</span>
         <h1 id="hero-title">Campus life.<br><em>Sorted.</em></h1>
-        <p>From everyday clogs and room mats to scents and pantry rice, M3 brings useful campus and everyday essentials together for CBU students.</p>
+        <p>From everyday clogs and room mats to scents, pantry rice, and other useful finds, M3 brings campus essentials together for CBU students.</p>
         <div class="hero-actions">
           <a class="button" href="#shop">Shop the essentials <span aria-hidden="true">→</span></a>
           <a class="text-link" href="#story">About M3 <span aria-hidden="true">↗</span></a>
@@ -614,13 +633,14 @@
         <a class="category" href="#shop" data-category-link="mats"><span class="category-icon" aria-hidden="true">🧶</span><span><strong>Mats</strong><small>Make your room yours</small></span></a>
         <a class="category" href="#shop" data-category-link="scents"><span class="category-icon" aria-hidden="true">🕯️</span><span><strong>Scents</strong><small>Freshen up your space</small></span></a>
         <a class="category" href="#shop" data-category-link="rice"><span class="category-icon" aria-hidden="true">🌾</span><span><strong>Rice & pantry</strong><small>Keep the kitchen sorted</small></span></a>
+        <a class="category" href="#other-goods"><span class="category-icon" aria-hidden="true">＋</span><span><strong>Other goods</strong><small>Ask about what you need</small></span></a>
       </div>
     </section>
 
     <section class="section wrap" id="shop" aria-labelledby="shop-title">
       <div class="section-heading">
-        <div><span class="eyebrow">The everyday line-up</span><h2 id="shop-title">Your campus essentials.</h2></div>
-        <p>Useful picks for campus days, student rooms, shared kitchens and everything in between.</p>
+        <div><span class="eyebrow">A few things we offer</span><h2 id="shop-title">Your campus essentials.</h2></div>
+        <p>These are just a few highlights. Have something else in mind? Ask us and we’ll let you know if it’s available.</p>
       </div>
       <div class="filters" role="group" aria-label="Filter products">
         <button class="filter active" type="button" data-filter="all" aria-pressed="true">All the good stuff</button>
@@ -647,6 +667,14 @@
           <div class="product-details"><small>Rice & pantry</small><h3>Everyday rice</h3><div class="product-meta"><span>For the shared kitchen or your own</span><strong>Ask for price</strong></div></div>
         </article>
       </div>
+      <aside class="more-goods" id="other-goods" aria-labelledby="more-goods-title">
+        <div>
+          <span class="eyebrow">Looking for something else?</span>
+          <h3 id="more-goods-title">Ask us about other goods.</h3>
+          <p>Our website only shows a few of the things we offer. Message us with what you need and we’ll confirm availability with you.</p>
+        </div>
+        <a class="button" href="https://wa.me/260972782404?text=Hi%20M3%2C%20I%27m%20a%20CBU%20student%20looking%20for%20something%20not%20listed%20on%20your%20website.%20Do%20you%20have%20it%20available%3F">Ask on WhatsApp <span aria-hidden="true">↗</span></a>
+      </aside>
     </section>
 
     <section class="section wrap" id="story" aria-labelledby="story-title">
