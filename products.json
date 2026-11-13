@@ -59,16 +59,16 @@
       "optionsPrompt": "Ask us about available sizes, colors, and stock."
     },
     {
-      "name": "Painting",
+      "name": "Room Painting",
       "category": "Mats",
-      "description": "Add a personal touch to your room walls",
+      "description": "Refresh your room with a fresh coat of paint",
       "badge": "Room upgrade",
       "price": "Ask for price",
       "tone": "#e8e0d0",
-      "emoji": "🖼️",
+      "emoji": "🖌️",
       "image": "",
       "variants": [],
-      "optionsPrompt": "Ask us about available designs and stock."
+      "optionsPrompt": "Ask us about room painting rates and availability."
     },
     {
       "name": "Men's Perfume",
