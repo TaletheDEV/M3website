@@ -777,6 +777,8 @@
       article.append(imagePanel, details);
       return article;
     }
+      
+        function setActiveFilter(selected) {
       filterContainer.querySelectorAll(".filter").forEach((button) => {
         const active = button.dataset.filter === selected;
         button.classList.toggle("active", active);
