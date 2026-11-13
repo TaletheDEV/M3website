@@ -364,7 +364,7 @@
     }
     .filter:hover, .filter.active { border-color: var(--green); background: var(--green); color: white; }
     .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 17px; }
-    .product { min-width: 0; }
+    .product { display:flex; flex-direction:column; min-width:0; overflow:hidden; border:1px solid rgba(32,52,44,.08); border-radius:10px; background:var(--white); box-shadow:0 6px 20px rgba(32,52,44,.06); transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease; } .product:focus-within { border-color:var(--green); } @media (hover:hover) and (pointer:fine) { .product:hover { transform:translateY(-4px); border-color:rgba(32,52,44,.16); box-shadow:0 14px 30px rgba(32,52,44,.12); } } .product:active { transform:translateY(-1px); }
     .product[hidden] { display: none; }
     .product-image {
       position: relative;
@@ -405,7 +405,7 @@
       letter-spacing: .035em;
       text-transform: uppercase;
     }
-    .product-details { padding: 13px 2px 0; }
+    .product-details { display:flex; flex:1; flex-direction:column; padding:16px; }
     .product-details small { color: #805338; font-size: 9px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
     .product-details h3 { margin: 6px 0 5px; font-family: var(--sans); font-size: 17px; font-weight: 750; letter-spacing: -.02em; }
     .product-meta { display: flex; justify-content: space-between; gap: 8px; align-items: center; color: var(--muted); font-size: 11px; }
@@ -413,7 +413,7 @@
     .product-variants { display: grid; gap: 4px; margin: 10px 0 0; padding: 0; color: var(--muted); font-size: 11px; list-style: none; }
     .product-variants li { line-height: 1.5; }
     .product-availability { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
-    .product-order { width: 100%; margin-top: 12px; }
+    .product-order { width:100%; min-height:44px; margin-top:auto; padding-inline:12px; }
     .catalogue-status { grid-column: 1 / -1; color: var(--muted); font-size: 13px; }
     .more-goods {
       display: flex;
@@ -575,7 +575,7 @@
       .section-heading { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 22px; }
       .section-heading h2 { font-size: 39px; }
       .section-heading > p { font-size: 12px; }
-      .products { gap: 23px 12px; }
+      .products { gap:20px 12px; }
       .product-image { min-height: 180px; }
       .product-emoji { font-size: 62px; }
       .product-details h3 { font-size: 18px; }
