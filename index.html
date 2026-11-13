@@ -413,6 +413,7 @@
     .product-variants { display: grid; gap: 4px; margin: 10px 0 0; padding: 0; color: var(--muted); font-size: 11px; list-style: none; }
     .product-variants li { line-height: 1.5; }
     .product-availability { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .product-order { width: 100%; margin-top: 12px; }
     .catalogue-status { grid-column: 1 / -1; color: var(--muted); font-size: 13px; }
     .more-goods {
       display: flex;
@@ -766,11 +767,16 @@
       } else if (product.optionsPrompt) {
         details.append(makeElement("p", "product-availability", product.optionsPrompt));
       }
+                  const orderMessage = "Hi M3, I'm interested in " + product.name + ". Please confirm the price (" + (product.price || "price on request") + ") and availability. My preferred size, color/type, and quantity: ";
+      const orderLink = makeElement("a", "button product-order", "Order on WhatsApp");
+      orderLink.href = "https://wa.me/260972782404?text=" + encodeURIComponent(orderMessage);
+      orderLink.target = "_blank";
+      orderLink.rel = "noopener noreferrer";
+      orderLink.setAttribute("aria-label", "Ask about " + product.name + " on WhatsApp");
+            details.append(orderLink);
       article.append(imagePanel, details);
       return article;
     }
-
-    function setActiveFilter(selected) {
       filterContainer.querySelectorAll(".filter").forEach((button) => {
         const active = button.dataset.filter === selected;
         button.classList.toggle("active", active);
